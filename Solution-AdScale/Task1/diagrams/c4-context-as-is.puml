@@ -1,0 +1,21 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title C4 Context Diagram — AdScale (AS-IS)
+
+Person(advertiser, "Рекламодатель", "Управляет кампаниями, бюджетами и ставками")
+Person_Ext(endUser, "Пользователь сайта/приложения", "Просматривает рекламу, кликает по баннерам")
+
+System_Ext(dspPartner, "DSP-партнёр", "Отправляет bid-requests, получает bid-responses по OpenRTB")
+System_Ext(paymentGateway, "Платёжный шлюз", "Обработка пополнения рекламных бюджетов")
+System_Ext(adNetwork, "Рекламная сеть / издатель", "Предоставляет инвентарь для показа рекламы")
+
+System(adscale, "AdScale Platform", "SaaS-платформа для размещения цифровой рекламы: RTB-аукционы, управление кампаниями, аналитика, финансы")
+
+Rel_R(advertiser, adscale, "Управляет кампаниями и бюджетами", "HTTPS / Web UI")
+Rel_L(endUser, adscale, "Просмотр рекламы и клики", "HTTPS")
+Rel_U(dspPartner, adscale, "Bid-requests / responses", "HTTPS / OpenRTB")
+Rel_D(adscale, paymentGateway, "Пополнение бюджетов, списания", "HTTPS / REST")
+Rel(adscale, adNetwork, "Покупка инвентаря, доставка рекламы", "HTTPS / OpenRTB")
+
+@enduml

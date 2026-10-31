@@ -1,0 +1,30 @@
+@startuml
+
+title Bidding Service - Sequence Diagram
+
+participant "DSP" as dsp
+participant "API Gateway" as gw
+participant "Bidding Service" as bid
+participant "Redis" as redis
+participant "PostgreSQL" as pg
+participant "Kafka" as kafka
+participant "Campaign Service" as campaign
+
+dsp -> gw: POST /api/v1/bidding/**, Ставка
+activate gw
+gw -> gw: Авторизация, Rate limit 
+gw -> bid: gRPC
+activate bid
+bid -> redis: Получение данных по компаниям
+redis --> bid
+bid -> bid: бизнес логика
+bid -> pg: Передача результата аукциона
+pg --> bid
+bid -> kafka: Передать данные о ставке
+kafka --> bid
+bid --> gw: Результат
+deactivate bid
+gw --> dsp: Результат
+deactivate gw
+
+@enduml

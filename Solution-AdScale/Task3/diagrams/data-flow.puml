@@ -1,0 +1,89 @@
+@startuml
+title AdScale — потоки данных
+
+skinparam componentStyle rectangle
+skinparam databaseStyle rectangle
+
+' ====================== Внешние системы ======================
+component "DSP Partners" as dsp #LightYellow
+component "Advertisers" as adv #LightYellow
+component "Пользователи" as user #LightYellow
+
+' ====================== Сервисы ======================
+package "AdScale" as ads {
+    component "API Gateway" as gw #LightBlue
+    component "Bidding Service" as bid #LightGreen
+    component "Campaign Service" as camp #LightGreen
+    component "Delivery Service" as deliv #LightGreen
+    component "Statistics Service" as stats #LightGreen
+    component "Analytics Service" as analytics #LightGreen
+    component "Financial Service" as fin #LightGreen
+    component "Dashboard (BFF)" as dash #LightBlue
+}
+
+' ====================== Базы данных ======================
+database "PostgreSQL\n(bidding DB)" as pg_bid #LightBlue
+database "PostgreSQL\n(campaign DB)" as pg_camp #LightBlue
+database "PostgreSQL\n(financial DB)" as pg_fin #LightBlue
+database "PostgreSQL\n(statistics DB)" as pg_stats #LightBlue
+database "PostgreSQL\n(delivery DB)" as pg_deliv #LightBlue
+database "PostgreSQL\nRead Replica" as pg_analytics #LightBlue
+queue "Kafka Cluster" as kafka #LightBlue
+database "Redis Cluster" as redis #LightBlue
+
+' ====================== Потоки ======================
+dsp --> gw : Запросы ставок
+gw --> bid : gRPC PlaceBid
+
+bid --> redis : Чтение+запись ставок кампаний
+bid --> pg_bid : Запись результатов аукциона
+bid --> kafka : Публикация событий ставок
+bid --> kafka : Получение событий кампаний
+
+camp --> pg_camp : Кампаний
+camp --> kafka : Публикация событий
+camp --> redis : Кеш
+
+deliv --> redis : Чтение данных
+deliv --> pg_deliv : Запись данных
+deliv --> kafka : Публикация кликов и показов
+deliv --> user : Показ реклам
+
+stats --> kafka : Получение событий ставок, кликов, показов
+stats --> pg_stats : Запись событий
+
+analytics --> pg_analytics : Чтение аналитических данных
+analytics --> kafka : Получение финансовых событий
+analytics --> dash : REST API
+
+fin --> pg_fin : Финансы
+fin --> kafka : Публикация финансовых событий
+
+adv --> dash : Управление кампаниями
+dash --> camp : REST API
+dash --> fin : REST API
+dash --> analytics : REST API
+
+' ====================== Коментарии ======================
+note right of kafka
+  **Поток событий**
+  - клики
+  - показы
+  - события
+end note
+
+note right of redis
+  **Кеширование**
+  - Ставки кампаний
+  - Список активных кампаний
+  - Информация о баннерах
+end note
+
+note bottom of pg_analytics
+  **Аналитика**
+  - PostgreSQL Read Replica
+  - Для тяжёлых SQL-запросов
+  - Незначительные задержки репликации допустимы
+end note
+
+@enduml

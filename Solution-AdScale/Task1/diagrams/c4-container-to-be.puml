@@ -1,0 +1,122 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+LAYOUT_LEFT_RIGHT()
+
+title C4 Container Diagram — AdScale (TO-BE, через 1 год)
+
+' ====================== Акторы ======================
+Person(advertiser, "Рекламодатель", "Управляет кампаниями, бюджетами и ставками через личный кабинет")
+Person_Ext(endUser, "Пользователь сайта/приложения", "Просматривает рекламу, кликает по баннерам")
+
+System_Ext(dspPartner, "DSP-партнёр", "Отправляет bid-requests, получает bid-responses по OpenRTB")
+System_Ext(paymentGateway, "Платёжный шлюз", "Обработка пополнения рекламных бюджетов")
+
+' ====================== Инфраструктура ======================
+System_Boundary(infra, "Инфраструктура") {
+    Container(apiGateway, "API Gateway", "Маршрутизация, Авторизация, Вход для DSP") <<apiGateway>>
+    ContainerDb(redis, "Redis", "Кеш кампаний, ставок, бюджетов; session store") <<Redis>>
+    Container(kafka, "Kafka", "Apache Kafka", "Клики, показы") <<Kafka>>
+}
+
+' ====================== Микросервисы ======================
+System_Boundary(microservices, "Микросервисы AdScale") {
+
+    Container(biddingService, "Bidding Service", "Аукцион, взвешивание ставок, бизнес-правила, расчёт победителя") <<Bidding Service>>
+    ContainerDb(biddingDb, "Bidding DB", "PostgreSQL", "Ставки, аукционные правила, победители")
+
+    Container(campaignService, "Campaign Service", "Кампании, таргетинг, бюджеты, креативы")
+    ContainerDb(campaignDb, "Campaign DB", "PostgreSQL", "Кампании, бюджеты")
+
+    Container(statsService, "Statistics Service", "Приём событий кликов/показов из Kafka, агрегация")
+    ContainerDb(statsDb, "Statistics DB", "События кликов/показов, агрегаты")
+
+    Container(analyticsService, "Analytics Service", "Python / Go", "Отчётность, дашборды, near-real-time аналитика")
+    ContainerDb(analyticsDb, "Analytics DB", "PostgreSQL Read Replica ", "Read-only аналитика, тяжёлые запросы")
+
+    Container(financialService, "Financial Service", "Списание средств, счета, балансы, идемпотентность")
+    ContainerDb(financialDb, "Financial DB", "PostgreSQL", "Транзакции, балансы, счета")
+
+    Container(deliveryService, "Delivery Service", "Node.js", "Формирование HTML/JS-разметки баннера и HTTP-ответа")
+
+    Container(dashboard, "Advertiser Dashboard (BFF)", "Node.js + JavaScript", "Web UI: управление кампаниями, отчётность, BFF pattern")
+}
+
+' ====================== Связи: внешние ======================
+Rel_U(dspPartner, apiGateway, "Bid-requests / responses", "HTTPS / OpenRTB")
+Rel_U(endUser, deliveryService, "Просмотр рекламы и клики", "HTTPS")
+Rel(advertiser, dashboard, "Управляет кампаниями и бюджетами", "HTTPS")
+Rel(dashboard, paymentGateway, "Пополнение бюджета", "HTTPS / REST")
+
+' ====================== Связи: API Gateway → сервисы ======================
+Rel(apiGateway, biddingService, "Bid-requests (маршрутизация)", "gRPC")
+Rel(apiGateway, deliveryService, "Ad requests", "HTTP/REST")
+
+' ====================== Связи: Bidding Service ======================
+Rel(biddingService, redis, "Чтение кампаний/ставок (cache-aside)", "RESP")
+Rel(biddingService, biddingDb, "Запись результатов аукциона", "JDBC / Sync")
+Rel(biddingService, campaignService, "Получение активных кампаний", "gRPC")
+Rel(biddingService, kafka, "Публикация bid events", "Kafka Producer")
+
+' ====================== Связи: Campaign Service ======================
+Rel(campaignService, campaignDb, "CRUD кампании", "JDBC")
+Rel(campaignService, redis, "Обновление кеша кампаний", "RESP")
+Rel(campaignService, kafka, "Публикация campaign events", "Kafka Producer")
+
+' ====================== Связи: Statistics Service ======================
+Rel(statsService, kafka, "Потребление кликов/показов", "Kafka Consumer")
+Rel(statsService, statsDb, "Запись статистики")
+
+' ====================== Связи: Analytics Service ======================
+Rel(analyticsService, analyticsDb, "Тяжёлые запросы (read-only)", "JDBC")
+Rel(analyticsService, statsDb, "Чтение статистики")
+Rel(dashboard, analyticsService, "Запросы аналитики", "REST")
+
+' ====================== Связи: Financial Service ======================
+Rel(financialService, financialDb, "Транзакции и балансы", "JDBC")
+Rel(financialService, kafka, "Публикация financial events", "Kafka Producer")
+Rel(dashboard, financialService, "Управление финансами", "REST")
+
+' ====================== Связи: Delivery Service ======================
+Rel(deliveryService, redis, "Чтение cached creative", "RESP")
+Rel(deliveryService, kafka, "Публикация impression/click events", "Kafka Producer")
+Rel(dashboard, deliveryService, "Управление креативами", "REST")
+
+' ====================== Аннотации ======================
+
+note right of biddingService
+  **Критичный сервис**
+  P95 ≤ 80 мс
+  возможно горизонтальное масштабирование
+  Redis для кеша
+end note
+
+note right of redis
+  **Redis**
+  Кеш кампаний, ставок, бюджетов
+  TTL + инвалидация по событиям
+end note
+
+note bottom of kafka
+  **Kafka**
+  клики, показы, события ставок
+end note
+
+note right of apiGateway
+  **API Gateway**
+  Ограничение частоты запросов от DSP
+  Аутентификация
+  Мониторинг задержки ответа
+end note
+
+' ====================== Легенда ======================
+legend right
+  <#FF0000> **Цель: 50 000 RPS, P95 ≤ 80 мс, SLA 99.9%**
+  <#00AA00> Микросервисная архитектура
+  <#0066CC> Event-driven: Kafka для всех событий
+  <#AA6600> Собственные базы
+  <#888888> Redis для кеша
+endlegend
+
+@enduml
