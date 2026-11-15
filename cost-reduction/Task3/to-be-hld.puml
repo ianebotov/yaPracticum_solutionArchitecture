@@ -1,0 +1,46 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title TO-BE: Целевая облачная архитектура VitaStore
+
+Person(cashier, "Кассир", "Пробивает товары, принимает оплату")
+
+System_Boundary(store, "Магазин") {
+    Container(tablet, "Планшет кассира", "Android\IOS", "Пробитие чеков")
+    Container(edge, "Local Gateway", "Gateway", "Связь с локальным оборудованием и облаком, хранит данные для обеспечения автономной работы")
+    Container(hal, "Hardware Abstraction", "Адаптер оборудования", "Один интерфейс для любых терминалов и регистраторов")
+    Container(terminal, "Банковский терминал", "Приём карт", "Связь с банком")
+    Container(fr, "Фискальный регистратор", "Печать чеков", "Печать чеков")
+}
+System_Boundary(cloud, "Облако") {
+    Container(api_gateway, "API Gateway", "Gateway", "Маршрутизация, аутентификация, rate limiting")
+    Container(cloud_pos, "Cloud POS", "Облачная касса", "Каталог, цены, акции, лояльность")
+    Container(payment_gw, "Payment Gateway", "Платёжный шлюз", "Единый интерфейс для всех банков")
+    ContainerDb(cloud_db, "Cloud DB", "Центральное хранилище", "Товары, цены, продажи")
+    Container(sync, "Sync Service", "Синхронизация", "Забирает накопленные офлайн-продажи")
+}
+System_Boundary(hq, "Центральный офис (HQ)") {
+    Container(sap, "SAP ERP", "ABAP, On-Prem", "Учёт товаров, кадров, финансов")
+    Container(promo, "Promo Engine", "In-House", "Единый движок промоакций")
+    Container(fulfillment, "Smart Fulfillment", "In-House", "Омниканальная логистика, Click & Collect")
+}
+System_Ext(bank, "Банк", "Проверяет платеж и списывает деньги с карты")
+
+Rel(cashier, tablet, "Пробивает чеки, сканирует ШК")
+Rel(tablet, edge, "Команды. Работа без интернет")
+Rel(edge, api_gateway, "HTTPS\REST")
+Rel(edge, hal, "команды оборудованию","gRPS")
+Rel(hal, terminal, "Оплата по карте","USB/COM")
+Rel(hal, fr, "Печать чека","USB/COM")
+Rel(api_gateway, cloud_pos, "Команды","gRPS")
+Rel(cloud_pos, cloud_db, "Запись продаж, чтение номенклатур","SQL/TCP")
+Rel(cloud_pos, payment_gw, "Инициирует оплату")
+Rel(payment_gw, edge, "Передаёт команду оплаты")
+Rel(payment_gw, bank, "Списывает деньги")
+Rel(sync, edge, "Забирает накопленные продажи")
+Rel(sync, cloud_db, "Записывает офлайн-продажи в центральную базу")
+Rel(cloud_pos, sap, "Получает цены и остатки")
+Rel(sap, promo, "Акции и цены")
+Rel(sap, fulfillment, "Резервирование товаров")
+
+@enduml

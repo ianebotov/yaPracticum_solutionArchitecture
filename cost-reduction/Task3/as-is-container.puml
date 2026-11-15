@@ -1,0 +1,38 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title AS-IS: Архитектура кассовой зоны VitaStore
+
+Person(cashier, "Кассир", "Пробивает чеки, принимает товар")
+
+System_Boundary(store, "Магазин") {
+    Container(pos, "POS App (Толстый клиент)", "Windows, C#", "Кассовое ПО, локальная БД товаров, расчёт премий")
+    ContainerDb(localdb, "Local DB", "MS SQL Express", "Номенклатура, цены, транзакции")
+    Container(terminal, "Банковский терминал", "ARCUS-2 / протокол банка", "Прямая интеграция в POS по USB")
+    Container(fr, "Фискальный регистратор", "Печать чеков, ОФД", "Прямая интеграция в POS по COM")
+    Container(loyalty, "Лояльность", "Excel / Бумага", "Накопление баллов вручную")
+}
+
+System_Boundary(hq, "Центральный офис (HQ)") {
+    Container(sap, "SAP ERP", "On-premises", "Учёт товаров, кадров, финансов")
+    Container(promo, "Promo Engine", , "Единый движок промоакций")
+    Container(fulfillment, "Smart Fulfillment", , "Омниканальная логистика, Click & Collect")
+    Container(data_int, "Team Data Integration", "Python, Excel", "Ручной SKU Matching при M&A")
+}
+
+System_Ext(bank, "Банк-эквайер", "Обработка платежей")
+System_Ext(supplier, "Поставщики", "Прямые поставки в магазин")
+
+Rel(cashier, pos, "Пробивает чеки")
+Rel(cashier, loyalty, "Записывает баллы вручную")
+Rel(supplier, pos, "Поставка товара", "Бумажные накладные")
+Rel(pos, localdb, "Читает цены/пишет чеки", "SQL/TCP")
+Rel(pos, terminal, "Отправляет сумму", "USB, драйвер, зависит от модели")
+Rel(terminal, bank, "Авторизация платежа")
+Rel(pos, fr, "Печать чека", "COM")
+Rel(pos, sap, "Ночной обмен файлами", "FTP, XML в 02:00")
+Rel(data_int, sap, "Ручная загрузка номенклатуры", "Excel/VLOOKUP")
+Rel(sap, promo, "Получает акции")
+Rel(sap, fulfillment, "Резервирование товаров")
+
+@enduml

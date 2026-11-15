@@ -1,0 +1,136 @@
+<mxfile host="Electron" agent="Mozilla/5.0">
+  <diagram name="Business Capability Map" id="vitastore-bcm">
+    <mxGraphModel dx="2943" dy="2086" grid="1" gridSize="10" guides="1" tooltips="1" connect="0" arrows="0" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontFamily=Helvetica;" value="&lt;b&gt;VitaStore — Тепловая карта бизнес-возможностей&lt;/b&gt;" vertex="1">
+          <mxGeometry height="40" width="840" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-sales-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;arcSize=6;" value="" vertex="1">
+          <mxGeometry height="110" width="840" x="40" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-sales-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontFamily=Helvetica;" value="&lt;b&gt;Продажи и обслуживание клиентов&lt;/b&gt;" vertex="1">
+          <mxGeometry height="20" width="400" x="60" y="88" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-pos" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="POS / Пробитие чеков" vertex="1">
+          <mxGeometry height="28" width="150" x="60" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-loyalty" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Программа лояльности" vertex="1">
+          <mxGeometry height="28" width="140" x="220" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-incass" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Инкассация" vertex="1">
+          <mxGeometry height="28" width="90" x="370" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-pricetag" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Печать ценников" vertex="1">
+          <mxGeometry height="28" width="110" x="470" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-cashier-hr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Расчёт премий продавцов" vertex="1">
+          <mxGeometry height="28" width="160" x="590" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-assort-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;arcSize=6;" value="" vertex="1">
+          <mxGeometry height="110" width="840" x="40" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-assort-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontFamily=Helvetica;" value="&lt;b&gt;Управление ассортиментом&lt;/b&gt;" vertex="1">
+          <mxGeometry height="20" width="400" x="60" y="208" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-sku" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="SKU Matching" vertex="1">
+          <mxGeometry height="28" width="110" x="60" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-nomen" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Номенклатура и ценообразование" vertex="1">
+          <mxGeometry height="28" width="200" x="180" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-promo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Промоакции" vertex="1">
+          <mxGeometry height="28" width="90" x="390" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-price-mgmt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Управление ценами" vertex="1">
+          <mxGeometry height="28" width="130" x="490" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-log-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;arcSize=6;" value="" vertex="1">
+          <mxGeometry height="110" width="840" x="40" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-log-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontFamily=Helvetica;" value="&lt;b&gt;Логистика и цепочка поставок&lt;/b&gt;" vertex="1">
+          <mxGeometry height="20" width="400" x="60" y="328" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-fulfill" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Smart Fulfillment" vertex="1">
+          <mxGeometry height="28" width="120" x="60" y="358" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-clickcollect" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Click &amp; Collect" vertex="1">
+          <mxGeometry height="28" width="110" x="190" y="358" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-receive" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Приём товара" vertex="1">
+          <mxGeometry height="28" width="100" x="310" y="358" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-wms" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Складской учёт" vertex="1">
+          <mxGeometry height="28" width="110" x="420" y="358" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-delivery" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Доставка в магазин" vertex="1">
+          <mxGeometry height="28" width="130" x="540" y="358" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-fin-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;arcSize=6;" value="" vertex="1">
+          <mxGeometry height="90" width="840" x="40" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-fin-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontFamily=Helvetica;" value="&lt;b&gt;Финансы и учёт&lt;/b&gt;" vertex="1">
+          <mxGeometry height="20" width="400" x="60" y="448" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-erp-fin" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Бухгалтерия и финансы" vertex="1">
+          <mxGeometry height="28" width="150" x="60" y="478" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-report" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Отчётность" vertex="1">
+          <mxGeometry height="28" width="90" x="220" y="478" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-budget" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Бюджетирование" vertex="1">
+          <mxGeometry height="28" width="120" x="320" y="478" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-hr-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;arcSize=6;" value="" vertex="1">
+          <mxGeometry height="90" width="840" x="40" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-hr-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontFamily=Helvetica;" value="&lt;b&gt;Управление персоналом&lt;/b&gt;" vertex="1">
+          <mxGeometry height="20" width="400" x="60" y="548" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-hr-base" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Кадровый учёт" vertex="1">
+          <mxGeometry height="28" width="110" x="60" y="578" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-schedule" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Управление графиками" vertex="1">
+          <mxGeometry height="28" width="150" x="180" y="578" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-training" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Обучение персонала" vertex="1">
+          <mxGeometry height="28" width="130" x="340" y="578" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-it-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;arcSize=6;" value="" vertex="1">
+          <mxGeometry height="90" width="840" x="40" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-it-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontFamily=Helvetica;" value="&lt;b&gt;ИТ и инфраструктура&lt;/b&gt;" vertex="1">
+          <mxGeometry height="20" width="400" x="60" y="648" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-servers" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Локальные серверы (500+)" vertex="1">
+          <mxGeometry height="28" width="170" x="60" y="678" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-cloud-infra" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Облачная инфраструктура" vertex="1">
+          <mxGeometry height="28" width="160" x="240" y="678" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-security" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Информационная безопасность" vertex="1">
+          <mxGeometry height="28" width="180" x="410" y="678" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-ma-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;arcSize=6;" value="" vertex="1">
+          <mxGeometry height="90" width="840" x="40" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="l1-ma-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontFamily=Helvetica;" value="&lt;b&gt;M&amp;A и развитие&lt;/b&gt;" vertex="1">
+          <mxGeometry height="20" width="400" x="60" y="748" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-onboard" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Онбординг нового магазина" vertex="1">
+          <mxGeometry height="28" width="170" x="60" y="778" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-standard" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Стандартизация процессов" vertex="1">
+          <mxGeometry height="28" width="170" x="240" y="778" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-strat" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Стратегия M&amp;A" vertex="1">
+          <mxGeometry height="28" width="110" x="420" y="778" as="geometry" />
+        </mxCell>
+        <mxCell id="l2-tco" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontFamily=Helvetica;spacingLeft=8;spacingRight=8;" value="Контроль TCO" vertex="1">
+          <mxGeometry height="28" width="110" x="540" y="778" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
